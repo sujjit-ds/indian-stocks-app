@@ -1,0 +1,34 @@
+'use client';
+
+export default function Sparkline({ data, color = '#3b82f6' }) {
+  // Simple mock sparkline if no data provided
+  const points = data || [20, 40, 30, 70, 50, 80, 60, 90];
+  const width = 120;
+  const height = 40;
+  const padding = 5;
+
+  const min = Math.min(...points);
+  const max = Math.max(...points);
+  const range = max - min;
+
+  const getX = (index) => (index / (points.length - 1)) * width;
+  const getY = (val) => height - padding - ((val - min) / range) * (height - 2 * padding);
+
+  const pathData = points.reduce((acc, val, i) => {
+    return `${acc} ${i === 0 ? 'M' : 'L'} ${getX(i)} ${getY(val)}`;
+  }, '');
+
+  return (
+    <svg width={width} height={height} className="overflow-visible">
+      <path
+        d={pathData}
+        fill="none"
+        stroke={color}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        style={{ filter: `drop-shadow(0 0 4px ${color}44)` }}
+      />
+    </svg>
+  );
+}

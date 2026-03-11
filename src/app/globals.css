@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+:root {
+  /* Fonts */
+  --font-display: 'Syne', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* Base Colors */
+  --bg-base:        #080b10;
+  --bg-surface:     #0d1117;
+  --bg-elevated:    #151b23;
+  --bg-overlay:     #1c2430;
+
+  /* Borders */
+  --border-subtle:  rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-active:  rgba(255, 255, 255, 0.20);
+
+  /* Text */
+  --text-primary:   #e8edf3;
+  --text-secondary: #7d8fa3;
+  --text-muted:     #3d4e62;
+
+  /* Accent — Electric Teal */
+  --accent:         #00d4aa;
+  --accent-dim:     rgba(0, 212, 170, 0.12);
+  --accent-glow:    rgba(0, 212, 170, 0.35);
+
+  /* Semantic */
+  --gain:           #00c97a;
+  --gain-dim:       rgba(0, 201, 122, 0.12);
+  --loss:           #ff4d6a;
+  --loss-dim:       rgba(255, 77, 106, 0.12);
+  --neutral:        #5b7fa6;
+
+  /* Elevation shadows */
+  --shadow-card:    0 1px 3px rgba(0,0,0,0.4), 0 8px 32px rgba(0,0,0,0.3);
+  --shadow-glow:    0 0 24px var(--accent-glow);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* App Shell Architecture */
+.app-shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+  background: var(--bg-base);
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.page-body {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-overlay) transparent;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-overlay);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Animations */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.4s ease both;
+}
+
+/* Typography Utilities */
+.mono {
+  font-family: var(--font-mono);
+}
+
+.text-gain { color: var(--gain); }
+.text-loss { color: var(--loss); }
